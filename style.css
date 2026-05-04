@@ -1,0 +1,730 @@
+/* --- CSS Variables --- */
+:root {
+  --clr-bg:         #f5f7fa;
+  --clr-surface:    #ffffff;
+  --clr-border:     #e2e8f0;
+  --clr-primary:    #3b82f6;
+  --clr-primary-dk: #2563eb;
+  --clr-success:    #22c55e;
+  --clr-danger:     #ef4444;
+  --clr-text-main:  #1e293b;
+  --clr-text-muted: #64748b;
+  --clr-pending:    #f59e0b;
+  --clr-done-bg:    #f0fdf4;
+  --clr-done-text:  #86efac;
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  18px;
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,.07);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,.12);
+
+  --transition: 0.2s ease;
+  --font-main: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--clr-bg);
+  color: var(--clr-text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px 48px;
+}
+
+/* --- App Wrapper --- */
+.app-wrapper {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- Header --- */
+.app-header {
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--clr-border);
+}
+
+.header-content { margin-bottom: 20px; }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--clr-primary);
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--clr-text-main);
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+  margin-left: 46px;
+}
+
+/* --- Task Summary Cards --- */
+.task-summary {
+  display: flex;
+  gap: 12px;
+}
+
+.summary-card {
+  flex: 1;
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 12px 8px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.summary-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- Main Content --- */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- Add Task Section --- */
+.add-task-section {
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  color: var(--clr-text-main);
+  background: var(--clr-bg);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.task-input:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  background: #fff;
+}
+
+.task-input::placeholder { color: var(--clr-text-muted); }
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.add-btn:hover  { background: var(--clr-primary-dk); }
+.add-btn:active { transform: scale(0.97); }
+
+.btn-icon { font-size: 1.1rem; line-height: 1; }
+
+.error-message {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--clr-danger);
+  font-weight: 500;
+}
+
+/* --- Filter Section --- */
+.filter-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+}
+
+.filter-group {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-btn {
+  padding: 7px 18px;
+  border: 2px solid var(--clr-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--clr-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+.filter-btn.active {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  color: #fff;
+}
+
+.clear-completed-btn {
+  padding: 7px 14px;
+  border: none;
+  background: none;
+  color: var(--clr-danger);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.clear-completed-btn:hover { background: #fef2f2; }
+
+/* --- Task List --- */
+.task-list-section {
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+}
+
+.task-list {
+  list-style: none;
+}
+
+/* --- Task Item --- */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--clr-border);
+  transition: background var(--transition);
+  animation: slideIn 0.25s ease;
+}
+
+.task-item:last-child { border-bottom: none; }
+.task-item:hover { background: var(--clr-bg); }
+
+.task-item.is-completed {
+  background: var(--clr-done-bg);
+}
+
+/* Checkbox */
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--clr-border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  background: #fff;
+}
+
+.task-checkbox:hover { border-color: var(--clr-primary); }
+
+.task-item.is-completed .task-checkbox {
+  background: var(--clr-success);
+  border-color: var(--clr-success);
+}
+
+.task-checkbox-tick {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: none;
+}
+
+.task-item.is-completed .task-checkbox-tick { display: block; }
+
+/* Task Text */
+.task-text {
+  flex: 1;
+  font-size: 0.93rem;
+  color: var(--clr-text-main);
+  line-height: 1.4;
+  word-break: break-word;
+  transition: var(--transition);
+}
+
+.task-item.is-completed .task-text {
+  text-decoration: line-through;
+  color: var(--clr-text-muted);
+}
+
+/* Status Badge */
+.task-status-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.status-pending {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.status-completed {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* Delete Button */
+.delete-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: #fee2e2;
+  color: var(--clr-danger);
+}
+
+/* --- Empty State --- */
+.empty-state {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty-icon { font-size: 3rem; margin-bottom: 12px; }
+
+.empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  margin-bottom: 4px;
+}
+
+.empty-desc {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+/* --- Due Date Input Row --- */
+.due-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.due-date-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-text-muted);
+  white-space: nowrap;
+}
+
+.optional-tag {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.due-date-input {
+  padding: 7px 12px;
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: var(--font-main);
+  color: var(--clr-text-main);
+  background: var(--clr-bg);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.due-date-input:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  background: #fff;
+}
+
+/* --- Task Body (text + due badge stacked) --- */
+.task-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* --- Due Date Badges on Task Items --- */
+.due-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+/* Overdue – red */
+.due-badge-overdue {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* Due today – amber */
+.due-badge-due-today {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* Upcoming – blue-grey */
+.due-badge-upcoming {
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #bfdbfe;
+}
+
+/* Completed – neutral grey */
+.due-badge-done {
+  background: #f8fafc;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+}
+
+/* Left border accent for overdue / due-today task rows */
+.has-due-overdue  { border-left: 4px solid #ef4444; }
+.has-due-due-today { border-left: 4px solid #f59e0b; }
+
+/* --- Footer --- */
+.app-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--clr-text-muted);
+  padding-top: 4px;
+}
+
+/* --- Utilities --- */
+.hidden { display: none !important; }
+
+/* --- Animations --- */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  body { padding: 16px 12px 40px; }
+
+  .app-header { padding: 20px 16px 18px; }
+
+  .logo-icon { width: 30px; height: 30px; font-size: 15px; }
+  .app-title  { font-size: 1.3rem; }
+  .app-subtitle { margin-left: 40px; }
+
+  .summary-number { font-size: 1.25rem; }
+
+  .btn-text { display: none; }
+  .add-btn  { padding: 12px 16px; }
+
+  .filter-section { padding: 12px 14px; }
+  .filter-btn     { padding: 6px 12px; font-size: 0.8rem; }
+
+  .task-item { padding: 12px 14px; gap: 10px; }
+  .task-status-badge { display: none; }
+}
+
+/*HISTORY & DATE FILTER — Additional Styles */
+
+/* --- View Toggle --- */
+.view-toggle-section {
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  justify-content: center;
+}
+
+.view-toggle-group {
+  display: flex;
+  gap: 8px;
+}
+
+.view-toggle-btn {
+  padding: 8px 22px;
+  border: 2px solid var(--clr-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--clr-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.view-toggle-btn:hover {
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+.view-toggle-btn.active {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  color: #fff;
+}
+
+/* --- Date Filter Row (History view) --- */
+.date-filter-section {
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.date-filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-text-muted);
+  white-space: nowrap;
+}
+
+.clear-date-filter-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--clr-danger);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.clear-date-filter-btn:hover { background: #fef2f2; }
+
+/* --- History Section --- */
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.history-group {
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+}
+
+.history-group-heading {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--clr-text-muted);
+  background: var(--clr-bg);
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.history-task-list { list-style: none; }
+
+/* --- Task Meta Badges Row --- */
+.task-meta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Created date badge */
+.created-date-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* --- Due Date Row in Form --- */
+.due-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.due-date-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-text-muted);
+  white-space: nowrap;
+}
+
+.optional-tag {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.due-date-input {
+  padding: 7px 12px;
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: var(--font-main);
+  color: var(--clr-text-main);
+  background: var(--clr-bg);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.due-date-input:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  background: #fff;
+}
+
+/* --- Task Body --- */
+.task-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* --- Due Date Badges on Task Items --- */
+.due-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.due-badge-overdue   { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+.due-badge-due-today { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
+.due-badge-upcoming  { background:#eff6ff; color:#3b82f6; border:1px solid #bfdbfe; }
+.due-badge-done      { background:#f8fafc; color:#94a3b8; border:1px solid #e2e8f0; }
+
+/* Left border accent for urgent tasks */
+.has-due-overdue   { border-left: 4px solid #ef4444; }
+.has-due-due-today { border-left: 4px solid #f59e0b; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .view-toggle-btn { padding: 7px 14px; font-size: 0.8rem; }
+  .date-filter-section { padding: 12px 14px; }
+  .history-group-heading { padding: 8px 14px; }
+}

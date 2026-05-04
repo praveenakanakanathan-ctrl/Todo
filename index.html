@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow – Todo Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- ========== HEADER ========== -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">✓</span>
+          <h1 class="app-title">TaskFlow</h1>
+        </div>
+        <p class="app-subtitle">Stay organized. Stay productive.</p>
+      </div>
+
+      <!-- Summary Counters -->
+      <div class="task-summary">
+        <div class="summary-card">
+          <span class="summary-number" id="totalCount">0</span>
+          <span class="summary-label">Total</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-number" id="pendingCount">0</span>
+          <span class="summary-label">Pending</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-number" id="completedCount">0</span>
+          <span class="summary-label">Done</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main-content">
+
+      <!-- Add Task Form -->
+      <section class="add-task-section">
+
+        <div class="input-group">
+          <input
+            type="text"
+            id="taskInput"
+            class="task-input"
+            placeholder="What needs to be done?"
+            maxlength="150"
+            autocomplete="off"
+          />
+          <button id="addTaskBtn" class="add-btn" aria-label="Add Task">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add Task</span>
+          </button>
+        </div>
+
+        <!-- Due Date: validated — today or future only -->
+        <div class="due-date-row">
+          <label for="dueDateInput" class="due-date-label">
+            📅 Due Date <span class="optional-tag">(optional — today or future only)</span>
+          </label>
+          <input type="date" id="dueDateInput" class="due-date-input" />
+        </div>
+
+        <p class="error-message hidden" id="errorMessage"></p>
+
+      </section>
+
+      <!-- View Toggle -->
+      <section class="view-toggle-section">
+        <div class="view-toggle-group" role="group" aria-label="View mode">
+          <button class="view-toggle-btn active" data-view="list">📋 Task List</button>
+          <button class="view-toggle-btn" data-view="history">🕓 History</button>
+        </div>
+      </section>
+
+      <!-- Status Filter (List view) -->
+      <section class="filter-section" id="statusFilterSection">
+        <div class="filter-group" role="group" aria-label="Filter by status">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+        <button class="clear-completed-btn hidden" id="clearCompletedBtn">
+          Clear Completed
+        </button>
+      </section>
+
+      <!-- Date Filter (History view) -->
+      <section class="date-filter-section hidden" id="dateFilterSection">
+        <label for="historyDatePicker" class="date-filter-label">📆 Filter by Created Date:</label>
+        <input type="date" id="historyDatePicker" class="due-date-input" />
+        <button class="clear-date-filter-btn hidden" id="clearDateFilterBtn">✕ Clear</button>
+      </section>
+
+      <!-- Task List Section -->
+      <section class="task-list-section" id="taskListSection">
+        <ul class="task-list" id="taskList" role="list" aria-label="Task list"></ul>
+        <div class="empty-state hidden" id="emptyState">
+          <div class="empty-icon">📋</div>
+          <p class="empty-title">No tasks here!</p>
+          <p class="empty-desc">Add a new task above to get started.</p>
+        </div>
+      </section>
+
+      <!-- History Section (grouped by created date) -->
+      <section class="history-section hidden" id="historySection">
+        <div id="historyGroupContainer"></div>
+        <div class="empty-state hidden" id="historyEmptyState">
+          <div class="empty-icon">🕓</div>
+          <p class="empty-title">No history found!</p>
+          <p class="empty-desc">No tasks match the selected date.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>TaskFlow &copy; 2026 — All data saved locally</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
